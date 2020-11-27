@@ -46,9 +46,10 @@ while aux==True or pagina!=None:
 
 print(archivos[0])
 
-for x in archivos:
+'''for x in archivos:
 
 	f = open("arc"+x['id']+".json", "x")
 
 	f.write(json.dumps(x))
 	f.close()
+'''

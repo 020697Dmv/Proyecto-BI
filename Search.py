@@ -19,7 +19,6 @@ while aux==True or pagina!=None:
   aux=False
   pl_response = pl_request.execute()
   try:
-    print(pl_response)
     pagina=pl_response['nextPageToken']
 
    
@@ -35,7 +34,9 @@ print(archivos[0])
 
 for x in archivos:
 
-  f = open("CS3/search"+x['id']+".json", "x")
+  dir = 'C:/Users/userr/Desktop/Poryecto BI/SC3'
+
+  f = open(dir+x['id']['videoId']+".json", "x")
 
   f.write(json.dumps(x))
   f.close()
