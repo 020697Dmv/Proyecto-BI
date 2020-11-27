@@ -1,3 +1,5 @@
+import requests  
+import json
 
 class Ystats:
 
@@ -8,6 +10,8 @@ class Ystats:
 		self.channel_statistics = None
 
 	def get_channel_statistics(self):
-
-		url = f'https://www.googleapis.com/youtube/v3/channels?part=statistics&id={self.channel_id}&key={api_key}'
-		print(url)
+		url = f'https://www.googleapis.com/youtube/v3/channels?part=statistics&id={self.channel_id}&key={self.api_key}'
+		#print(url)
+		json_url= requests.get(url)
+		data = json.loads(json_url.text)
+		print(data)
