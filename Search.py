@@ -15,7 +15,7 @@ aux=True
 while aux==True or pagina!=None:
   pl_request =youtube.search().list(q='machine learning tutorial', part='snippet', type='video', maxResults=50, pageToken=pagina)
 
-
+  pl_requests=youtube
   aux=False
   pl_response = pl_request.execute()
   try:
