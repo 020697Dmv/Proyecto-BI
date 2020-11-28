@@ -15,3 +15,6 @@ class Ystats:
 		json_url= requests.get(url)
 		data = json.loads(json_url.text)
 		print(data)
+		try:
+			data=data("items")[0]
+	
