@@ -2,7 +2,7 @@ import json
 
 from googleapiclient.discovery import build
 
-api_key = 'AIzaSyCK2qE6uIz7QLqybqW9SX12r5MokRFkF4M'
+api_key = 'AIzaSyDEyzx3wWj6e1NGuw_bBngQB-2anQ_uda4'
 
 youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -32,7 +32,7 @@ while aux==True or pagina!=None:
 
 print(archivos[0])
 
-for x in archivos:
+'''for x in archivos:
 
   dir = 'C:/Users/userr/Desktop/Poryecto BI/SC3'
 

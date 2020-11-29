@@ -2,7 +2,7 @@ import json
 
 from googleapiclient.discovery import build
 
-api_key = 'AIzaSyCK2qE6uIz7QLqybqW9SX12r5MokRFkF4M'
+api_key = 'AIzaSyDEyzx3wWj6e1NGuw_bBngQB-2anQ_uda4'
 
 youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -15,7 +15,7 @@ aux=True
 while aux==True or pagina!=None:
 	pl_request = youtube.playlistItems().list(
 	part='contentDetails',
-	playlistId="PL1av4CQniLB0dk5LnfWQhBUcRlzo2jBYB",
+	playlistId="PLmBFTxNFZbn_ROiUGJwVjvXy7sT6gC-ZQ",
 	maxResults=50,pageToken=pagina
 
 
@@ -46,6 +46,8 @@ while aux==True or pagina!=None:
 
 print(archivos[0])
 
+
+#data_json= data.__json
 '''for x in archivos:
 
 	f = open("arc"+x['id']+".json", "x")
