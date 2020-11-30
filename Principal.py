@@ -1,26 +1,37 @@
 import json
+import boto3
+
+# Let's use Amazon S3
+s3 = boto3.resource('s3')
 
 from googleapiclient.discovery import build
-#api_key = 'AIzaSyCK2qE6uIz7QLqybqW9SX12r5MokRFkF4M'
 #api_key='AIzaSyDEyzx3wWj6e1NGuw_bBngQB-2anQ_uda4'
-api_key='AIzaSyAZ6mWtOKz6bAo8sNz6sgdAXqKlIJ-y1oU'
+#api_key='AIzaSyAZ6mWtOKz6bAo8sNz6sgdAXqKlIJ-y1oU'
+#api_key = 'AIzaSyBvL8A6Gheekl91Z9ppRPJ06c_YygLNNX8'
+api_key='AIzaSyDz--xulSkFchn5PWLTPGEt1sYkK2Lxy5w'
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 #Endpoint que solicita los detalles de una lista en especifico
 
-listas = ['PL1av4CQniLB0dk5LnfWQhBUcRlzo2jBYB','PL952AEBEF137A5446']
+listas1 = ["PLmBFTxNFZbn8X-sFRiOBraJ5p3hf0TVCo","PL952AEBEF137A5446",
+"PLK2zhq9oy0K6rjySCH1nARTssbv8m2Kfm","PLJvQXRgtxlumTgSFCMV3aPajZrG-84ezO"]
 
-list1="PL1av4CQniLB0dk5LnfWQhBUcRlzo2jBYB"
+listas = ["machine learning tutorial","Deportes Quindio","Inteligencia de negocios",
+"sociedad del cansancio", "byung chul han","Python tutorial"]
 
+Canales=["HolaSoyGerman","vegetta777","EminemMusic",
+"Marshmello","elrubiusOMG","Fernanfloo","TheEllenShow"
+,"Centripio","Blackpink","pythonizando","hdeleon.net"]
 archivos1=[]
 archivos=[]
+canal=[]
 pagina=None
 aux=True
 
 while aux==True or pagina!=None:
 	pl_request = youtube.playlistItems().list(
-	part='contentDetails',
-	playlistId="PL1av4CQniLB0dk5LnfWQhBUcRlzo2jBYB",
+	part='snippet',
+	playlistId="PLK2zhq9oy0K67Rg-k8haJCKMSXbt7Fhtr",
 	maxResults=50,pageToken=pagina
 
 
@@ -49,44 +60,51 @@ while aux==True or pagina!=None:
 	
 	#print(len(archivos))
 
-print(archivos[0])
+cargar(archivos,"lista")
+
 
 
 # Endpoints que realizar una busqueda en Youtube
 
-pagina1=None
-aux1=True
 
-while aux1==True or pagina1!=None:
-  pl_request1 =youtube.search().list(q='machine learning tutorial', part='snippet', type='video', maxResults=50, pageToken=pagina1)
+for x in listas:
+  pl_request1 =youtube.search().list(
+      q=x,
+      part='snippet', type='video',
+        maxResults=10)
 
-  pl_requests1=youtube
-  aux1=False
+  #pl_requests1=youtube
   pl_response1 = pl_request1.execute()
-  try:
-    pagina1=pl_response1['nextPageToken']
+    #try:
+    #  pagina1=pl_response1['nextPageToken']
 
-   
-    archivos1.extend(pl_response1['items'])
-
-
-  except Exception as e:
-    pagina1=None
+    
+  archivos1.extend(pl_response1['items'])
   
-  #print(len(archivos))
 
-print(archivos1[0])
-
+cargar(archivos1,"search")
 
 
-# Endpoints que realizar una busqueda de las estadisticas de un Canal
 
 
-request_channel= youtube.channels().list(
 
-                part='statistics',
-                forUsername='vegeta777'
-            )
-responde = request_channel.execute()
 
-print(responde)
+for y in Canales:
+	request_channel= youtube.channels().list(
+
+					part='snippet',
+					forUsername=y
+				)
+	responde = request_channel.execute()
+
+	canal.extend(response1['items']))
+
+
+cargar(canal,"channel")
+
+def cargar(list,nombre):
+
+	for index,i in enumerate(canal):
+ 	 
+  	s3.Bucket('youtubes3').put_object(Body=json.dumps(i), Key="/BI/youtube/"+nombre+"/"+str(index)+".json")
+

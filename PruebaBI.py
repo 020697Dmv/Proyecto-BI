@@ -15,7 +15,7 @@ aux=True
 while aux==True or pagina!=None:
 	pl_request = youtube.playlistItems().list(
 	part='contentDetails',
-	playlistId="PLmBFTxNFZbn_ROiUGJwVjvXy7sT6gC-ZQ",
+	playlistId="PLmBFTxNFZbn_Sw-tyaNYu_O-4MtemJTRb",
 	maxResults=50,pageToken=pagina
 
 

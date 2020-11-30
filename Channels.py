@@ -1,20 +1,18 @@
 import requests  
 import json
 
-class Ystats:
+from googleapiclient.discovery import build
 
-	def  __init__(self,api_key,channel_id):
+api_key='AIzaSyBvL8A6Gheekl91Z9ppRPJ06c_YygLNNX8'
 
-		self.api_key= api_key
-		self.channel_id=channel_id
-		self.channel_statistics = None
+youtube = build('youtube', 'v3', developerKey=api_key)
 
-	def get_channel_statistics(self):
-		url = f'https://www.googleapis.com/youtube/v3/channels?part=statistics&id={self.channel_id}&key={self.api_key}'
-		#print(url)
-		json_url= requests.get(url)
-		data = json.loads(json_url.text)
-		print(data)
-		try:
-			data=data("items")[0]
+request_channel= youtube.channels().list(
+
+				part='snippet',
+				forUsername='vegetta777'
+			)
+responde = request_channel.execute()
+
+print(responde)
 	
