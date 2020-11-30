@@ -6,9 +6,8 @@ s3 = boto3.resource('s3')
 
 from googleapiclient.discovery import build
 #api_key='AIzaSyDEyzx3wWj6e1NGuw_bBngQB-2anQ_uda4'
-#api_key='AIzaSyAZ6mWtOKz6bAo8sNz6sgdAXqKlIJ-y1oU'
 #api_key = 'AIzaSyBvL8A6Gheekl91Z9ppRPJ06c_YygLNNX8'
-api_key='AIzaSyDz--xulSkFchn5PWLTPGEt1sYkK2Lxy5w'
+api_key='AIzaSyDiNy32RaXR7QxZpwCrZXluQ4fOgDuhWeU'
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 #Endpoint que solicita los detalles de una lista en especifico
@@ -21,8 +20,7 @@ listas = ["machine learning tutorial","Deportes Quindio","Inteligencia de negoci
 "sociedad del cansancio", "byung chul han","Python tutorial"]
 
 Canales=["HolaSoyGerman","vegetta777","EminemMusic",
-"Marshmello","elrubiusOMG","Fernanfloo","TheEllenShow"
-,"Centripio","Blackpink","pythonizando","hdeleon.net"]
+"elrubiusOMG","Fernanfloo","TheEllenShow"]
 archivos1=[]
 archivos=[]
 canal=[]
@@ -31,16 +29,18 @@ aux=True
 
 def cargar(list,nombre):
 
-	for index,i in enumerate(canal):
+	
+	for index,i in enumerate(list):
  	 
   		s3.Bucket('youtubes3').put_object(Body=json.dumps(i), Key="/BI/youtube/"+nombre+"/"+str(index)+".json")
 
 
 
 while aux==True or pagina!=None:
+	print("iiiiiiiiiiiiiiiiiiiittttttt")
 	pl_request = youtube.playlistItems().list(
 	part='snippet',
-	playlistId="PLK2zhq9oy0K67Rg-k8haJCKMSXbt7Fhtr",
+	playlistId="PLkLimRXN6NKw24PUEZqHW24CwphBZRDw3",
 	maxResults=50,pageToken=pagina
 
 
@@ -50,25 +50,16 @@ while aux==True or pagina!=None:
 	pl_response = pl_request.execute()
 	try:
 		pagina=pl_response['nextPageToken']
-		vid_ids=[]
+		
+		archivos.extend(pl_response['items'])
 
-		for item in pl_response['items']:
-			vid_ids.append(item['contentDetails']['videoId'])
-
-		vid_request= youtube.videos().list(
-
-			part="snippet",
-			id=','.join(vid_ids)
-		)
-		vid_response= vid_request.execute()
-		archivos.extend(vid_response['items'])
-
-
+		print("-----------------------------------------------------------------------------")
 	except Exception as e:
 		pagina=None
 	
 	#print(len(archivos))
 
+print(archivos)
 cargar(archivos,"lista")
 
 
@@ -101,10 +92,11 @@ for y in Canales:
 					part='snippet',
 					forUsername=y
 				)
-	responde = request_channel.execute()
 
-	canal.extend(responde['items'])
+	print(y)
+	pl_r = request_channel.execute()
 
+	canal.extend(pl_r['items'])
 
 cargar(canal,"channel")
 
