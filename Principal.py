@@ -13,6 +13,7 @@ youtube = build('youtube', 'v3', developerKey=api_key)
 
 #Endpoint que solicita los detalles de una lista en especifico
 
+
 listas1 = ["PLmBFTxNFZbn8X-sFRiOBraJ5p3hf0TVCo","PL952AEBEF137A5446",
 "PLK2zhq9oy0K6rjySCH1nARTssbv8m2Kfm","PLJvQXRgtxlumTgSFCMV3aPajZrG-84ezO"]
 
@@ -27,6 +28,14 @@ archivos=[]
 canal=[]
 pagina=None
 aux=True
+
+def cargar(list,nombre):
+
+	for index,i in enumerate(canal):
+ 	 
+  		s3.Bucket('youtubes3').put_object(Body=json.dumps(i), Key="/BI/youtube/"+nombre+"/"+str(index)+".json")
+
+
 
 while aux==True or pagina!=None:
 	pl_request = youtube.playlistItems().list(
@@ -94,14 +103,8 @@ for y in Canales:
 				)
 	responde = request_channel.execute()
 
-	canal.extend(response1['items'])
+	canal.extend(responde['items'])
 
 
 cargar(canal,"channel")
-
-def cargar(list,nombre):
-
-	for index,i in enumerate(canal):
- 	 
-  		s3.Bucket('youtubes3').put_object(Body=json.dumps(i), Key="/BI/youtube/"+nombre+"/"+str(index)+".json")
 
