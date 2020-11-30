@@ -86,9 +86,6 @@ cargar(archivos1,"search")
 
 
 
-
-
-
 for y in Canales:
 	request_channel= youtube.channels().list(
 
@@ -97,7 +94,7 @@ for y in Canales:
 				)
 	responde = request_channel.execute()
 
-	canal.extend(response1['items']))
+	canal.extend(response1['items'])
 
 
 cargar(canal,"channel")
@@ -106,5 +103,5 @@ def cargar(list,nombre):
 
 	for index,i in enumerate(canal):
  	 
-  	s3.Bucket('youtubes3').put_object(Body=json.dumps(i), Key="/BI/youtube/"+nombre+"/"+str(index)+".json")
+  		s3.Bucket('youtubes3').put_object(Body=json.dumps(i), Key="/BI/youtube/"+nombre+"/"+str(index)+".json")
 
