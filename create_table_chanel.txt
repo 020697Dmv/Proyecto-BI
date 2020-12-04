@@ -1,0 +1,8 @@
+{"kind": "youtube#channel", "etag": "8h7qqFr-9T2WiT7hfJaAg7eRAZQ", "id": "UCZJ7m7EnCNodqnu5SAtg8eQ", "snippet": {"title": "HolaSoyGerman.", "description": "Los Hombres De Verdad Usan Pantuflas De Perrito", "publishedAt": "2011-09-08T20:25:54Z", "thumbnails": {"default": {"url": "https://yt3.ggpht.com/ytc/AAUvwniM5m9Fjr_-LXzOyMuzQ7EfQm-UuYRXRpaLS_igqQ=s88-c-k-c0x00ffffff-no-rj", "width": 88, "height": 88}, "medium": {"url": "https://yt3.ggpht.com/ytc/AAUvwniM5m9Fjr_-LXzOyMuzQ7EfQm-UuYRXRpaLS_igqQ=s240-c-k-c0x00ffffff-no-rj", "width": 240, "height": 240}, "high": {"url": "https://yt3.ggpht.com/ytc/AAUvwniM5m9Fjr_-LXzOyMuzQ7EfQm-UuYRXRpaLS_igqQ=s800-c-k-c0x00ffffff-no-rj", "width": 800, "height": 800}}, "localized": {"title": "HolaSoyGerman.", "description": "Los Hombres De Verdad Usan Pantuflas De Perrito"}, "country": "CL"}}
+
+
+create table channel(kind varchar(255) not null, etag varchar(255) not null, id varchar(255) not null, snippet varchar(255), title varchar(255) not null, description varchar(255) not null, thumbnails varchar(255), url varchar(255) not null, country varchar(255) not null, primary key (id));
+
+insert into channel(kind, etag, id, snippet, title, description, thumbnails, url, country) values ("youtube#channel","8h7qqFr-9T2WiT7hfJaAg7eRAZQ","UCZJ7m7EnCNodqnu5SAtg8eQ","HolaSoyGerman","Los Hombres De Verdad Usan Pantuflas De Perrito","https://yt3.ggpht.com/ytc/AAUvwniM5m9Fjr_-LXzOyMuzQ7EfQm-UuYRXRpaLS_igqQ=s88-c-k-c0x00ffffff-no-rj","CL");
+
+
